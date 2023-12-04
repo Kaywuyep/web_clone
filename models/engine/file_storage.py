@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """our storage engine"""
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
