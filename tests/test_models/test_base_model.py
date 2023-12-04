@@ -36,8 +36,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('created_at', model_dict)
         self.assertIn('updated_at', model_dict)
         self.assertEqual(model_dict['__class__'], 'BaseModel')
-        self.assertEqual(model_dict['created_at'], self.model.created_at.isoformat())
-        self.assertEqual(model_dict['updated_at'], self.model.updated_at.isoformat())
+        self.assertEqual\
+            (model_dict['created_at'], self.model.created_at.isoformat())
+        self.assertEqual\
+            (model_dict['updated_at'], self.model.updated_at.isoformat())
 
     def test_str(self):
         """Test the __str__ method of BaseModel"""
