@@ -11,10 +11,25 @@ class BaseModel:
     def __init__(self):
         """
         initialization
+        Args:
+            *args: Not used
+            **kwargs: Key-value pairs of attributes and their values
         """
-        self.id = str(uuid.uuid4())  # uuid - Universally Unique Identifier
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                elif key == "created_at" or key == "updated_at":
+                    time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, time)
+                else:
+                    setattr(self, key, value)
+        else:
+            # If kwargs is empty, create id and created_at
+            self.id = str(uuid.uuid4())  # uuid - Universally Unique Identifier
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -31,6 +46,7 @@ class BaseModel:
         update the time it happened
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
