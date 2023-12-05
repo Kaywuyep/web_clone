@@ -61,14 +61,62 @@ class HBNBCommand(cmd.Cmd):
             We have to check if the 'id' exists, to achieve that we need to
             create id_obj with the form Classname.id that is the key that
             we will use to ask if it is in Storage and
-            can retrieve the value for that key, if the id_obj is not in
+            retrieve the value for that key, if the id_obj is not in
             storage then print 'no instance found'
             """
             id_obj = "{}.{}".format(args[0], args[1])
             if id_obj in storage.all():
-                print(storage.all()[key])
+                print(storage.all()[id_obj])
             else:
                 print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """
+        Deletes an instance based on the class name
+        and id (save the change into the JSON file).
+        Ex: $ destroy BaseModel 1234-1234-1234
+        """
+        args = shlex.split(arg)
+        if not args:
+            print ("** class name missing **")
+        elif args[0] not in HBNBCommand.list_objClass:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            """
+            We have to check if the 'id' exists, to achieve that we need to
+            create id_obj with the form Classname.id that is the key that
+            we will use to ask if it is in Storage and
+            delete the value for that key, if the id_obj is not in
+            storage then print 'no instance found'
+            """
+            id_obj = "{}.{}".format(args[0], args[1])
+            if id_obj in storage.all():
+                del storage.all()[id_obj]
+                storage.save()
+            else:
+                print("** no instance found **")
+
+    def do_all(self, arg):
+        """
+        Prints all string representation of all instances based or
+        not on the class name.
+        Ex: $ all BaseModel or $ all
+        """
+        my_list = []
+        args = shlex.split(arg)
+        if len(args) == 0:
+            for key, value in storage.all().items():
+                my_list.append(str(value))
+            print(my_list)
+        elif args[0] in HBNBCommand.list_objClass:
+            for key, value in storage.all().items():
+                if value.__class__.__name__ == args[0]:
+                    my_list.append(str(value))
+            print(my_list)
+        else:
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
