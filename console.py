@@ -103,6 +103,9 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances based or
         not on the class name.
         Ex: $ all BaseModel or $ all
+        we used a loop and a list (my_list) to store the string representations
+        of instances based on the class name. It checks if the
+        first argument (args[0]) is present
         """
         my_list = []
         args = shlex.split(arg)
@@ -117,6 +120,37 @@ class HBNBCommand(cmd.Cmd):
             print(my_list)
         else:
             print("** class doesn't exist **")
+
+    def do_update(self, arg):
+        """
+        Updates an instance based on the class name and id by adding or updating attribute.
+        Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
+        """
+        args = shlex.split(arg)
+        if not args or args[0] not in HBNBCommand.list_objClass:
+            print("** class name missing **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif "{}.{}".format(args[0], args[1]) not in storage.all():
+            print("** no instance found **")
+        elif len(args) < 3:
+            print("** attribute name missing **")
+        elif len(args) < 4:
+            print("** value missing **")
+        else:
+            objects = storage.all()
+            instance = "{}.{}".format(args[0], args[1])
+            if instance in objects.keys():
+                for value in objects.values():
+                    try:
+                        attr_type = type(getattr(value, args[2]))
+                        args[3] = attr_type(args[3])
+                    except AttributeError:
+                        pass
+                setattr(value, args[2], args[3])
+                storage.save()
+            else:
+                print("** no instance found **")
 
 
 if __name__ == '__main__':
