@@ -4,6 +4,7 @@ import cmd
 import shlex  # for splitting strings into token, esp in parsing cmd-line input
 from models.base_model import BaseModel
 from models.__init__ import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,7 +13,8 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
     list_objClass = [
-            "BaseModel"
+            "BaseModel",
+            "User"
             ]
 
     def do_quit(self, arg):
