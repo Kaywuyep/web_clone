@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """contains the entry point of the command interpreter"""
 import cmd
+import models
 import shlex  # for splitting strings into token, esp in parsing cmd-line input
 from models.base_model import BaseModel
 from models.__init__ import storage
@@ -19,13 +20,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     list_objClass = [
             "BaseModel",
-            "User"
+            "User",
             "Place",
             "State",
             "City",
             "Amenity",
-            "Review",
-            ]
+            "Review"]
 
     def do_quit(self, arg):
         """ Quit command to exit the program\n"""
@@ -33,7 +33,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """ EOF command to exit the program using CTRL+D"""
-        print(disconnected)
         return True
 
     def emptyline(self):
