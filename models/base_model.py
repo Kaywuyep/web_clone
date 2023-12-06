@@ -2,13 +2,15 @@
 """a base model for my web application"""
 import uuid
 from datetime import datetime
+import models
+# from models.__init__ import storage
 
 
 class BaseModel:
     """
     defines all common attributes/methods for other classes
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         initialization
         Args:
@@ -30,7 +32,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())  # uuid - Universally Unique Identifier
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+            models.storage.new(self)  # Add the instance to storage
 
     def __str__(self):
         """

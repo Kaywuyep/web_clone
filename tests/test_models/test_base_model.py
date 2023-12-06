@@ -6,9 +6,13 @@ import unittest
 import models
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+<<<<<<< HEAD
 from datetime import datetime
 import time
 import uuid
+=======
+# import models
+>>>>>>> dd632533fede95171d98452ce4040bcfe0f8360f
 
 
 class BaseTest(unittest.TestCase):
@@ -39,6 +43,7 @@ class BaseTest(unittest.TestCase):
         self.assertEqual(k_obj.city, "Mombasa")
 
     def test_save(self):
+<<<<<<< HEAD
         """Test method for save"""
         obj = BaseModel()
         # delay executing
@@ -61,6 +66,25 @@ class BaseTest(unittest.TestCase):
         self.assertIn("updated_at", obj_dict.keys())
         with self.assertRaises(KeyError) as e:
             obj1.to_dict()
+=======
+        """Test the save method of BaseModel"""
+        initial_updated_at = self.model.updated_at
+        self.model.save()
+        self.assertNotEqual(initial_updated_at, self.model.updated_at)
+
+    def test_to_dict(self):
+        """Test the to_dict method of BaseModel"""
+        model_dict = self.model.to_dict()
+        self.assertIsInstance(model_dict, dict)
+        self.assertIn('__class__', model_dict)
+        self.assertIn('created_at', model_dict)
+        self.assertIn('updated_at', model_dict)
+        self.assertEqual(model_dict['__class__'], 'BaseModel')
+        self.assertEqual\
+            (model_dict['created_at'], self.model.created_at.isoformat())
+        self.assertEqual\
+            (model_dict['updated_at'], self.model.updated_at.isoformat())
+>>>>>>> dd632533fede95171d98452ce4040bcfe0f8360f
 
     def test_str(self):
         """Test method for string representation"""
