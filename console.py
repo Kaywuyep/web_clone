@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = shlex.split(arg)
         if not args:
-            print ("** class name missing **")
+            print("** class name missing **")
         elif args[0] not in HBNBCommand.list_objClass:
             print("** class doesn't exist **")
         elif len(args) < 2:
@@ -134,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and id by adding or updating attribute.
+        Updates an instance based on the class name
+        and id by adding or updating attribute.
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
         """
         args = shlex.split(arg)

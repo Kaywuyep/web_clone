@@ -5,7 +5,6 @@ from datetime import datetime
 from models.base_model import BaseModel
 
 
-
 class TestBaseModel(unittest.TestCase):
     """Test cases for the BaseModel class"""
 
@@ -31,16 +30,16 @@ class TestBaseModel(unittest.TestCase):
 
     def test_to_dict(self):
         """Test the to_dict method of BaseModel"""
-        model_dict = self.model.to_dict()
-        self.assertIsInstance(model_dict, dict)
-        self.assertIn('__class__', model_dict)
-        self.assertIn('created_at', model_dict)
-        self.assertIn('updated_at', model_dict)
-        self.assertEqual(model_dict['__class__'], 'BaseModel')
-        self.assertEqual\
-            (model_dict['created_at'], self.model.created_at.isoformat())
-        self.assertEqual\
-            (model_dict['updated_at'], self.model.updated_at.isoformat())
+        my_dict = self.model.to_dict()
+        self.assertIsInstance(my_dict, dict)
+        self.assertIn('__class__', my_dict)
+        self.assertIn('created_at', my_dict)
+        self.assertIn('updated_at', my_dict)
+        self.assertEqual(my_dict['__class__'], 'BaseModel')
+        self.assertEqual(
+            my_dict['created_at'], self.model.created_at.isoformat())
+        self.assertEqual(
+            my_dict['updated_at'], self.model.updated_at.isoformat())
 
     def test_str(self):
         """Test the __str__ method of BaseModel"""
