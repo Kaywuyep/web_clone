@@ -15,7 +15,7 @@ from models.user import User
 from models.engine.file_storage import FileStorage
 
 
-class TestUser(unittest.TestCase):
+class TestState(unittest.TestCase):
     """my test cases"""
     def setUp(self):
         """set up commom user for test cases"""
