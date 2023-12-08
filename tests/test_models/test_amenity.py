@@ -70,5 +70,5 @@ class TestAmenity(unittest.TestCase):
         self.assertNotEqual(initial_updated_at, updated_updated_at)
 
 
-#if __name__ == '__main__':
- #   unittest.main()
+if __name__ == '__main__':
+   unittest.main()
