@@ -85,3 +85,7 @@ class TestUser(unittest.TestCase):
 
         self.assertEqual(initial_created_at, updated_created_at)
         self.assertNotEqual(initial_updated_at, updated_updated_at)
+
+
+#if __name__ == '__main__':
+ #   unittest.main()

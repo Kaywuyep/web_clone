@@ -75,3 +75,20 @@ class TestReview(unittest.TestCase):
         initial_updated_at = self.review.updated_at
         self.review.save()
         self.assertNotEqual(initial_updated_at, self.review.updated_at)
+
+    def test_created_at_and_updated_at(self):
+        """Test created_at and updated_at attributes"""
+        initial_created_at = self.review.created_at
+        initial_updated_at = self.review.updated_at
+
+        # Simulate a delay
+        self.review.save()
+        updated_created_at = self.review.created_at
+        updated_updated_at = self.review.updated_at
+
+        self.assertEqual(initial_created_at, updated_created_at)
+        self.assertNotEqual(initial_updated_at, updated_updated_at)
+
+
+#if __name__ == '__main__':
+ #   unittest.main()

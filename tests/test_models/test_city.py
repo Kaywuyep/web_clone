@@ -15,7 +15,7 @@ from models.user import User
 from models.engine.file_storage import FileStorage
 
 
-class TestPlace(unittest.TestCase):
+class TestCity(unittest.TestCase):
     """my test cases"""
 
     def setUp(self):
@@ -57,3 +57,20 @@ class TestPlace(unittest.TestCase):
         initial_updated_at = self.city.updated_at
         self.city.save()
         self.assertNotEqual(initial_updated_at, self.city.updated_at)
+
+    def test_created_at_and_updated_at(self):
+        """Test created_at and updated_at attributes"""
+        initial_created_at = self.city.created_at
+        initial_updated_at = self.city.updated_at
+
+        # Simulate a delay
+        self.city.save()
+        updated_created_at = self.city.created_at
+        updated_updated_at = self.city.updated_at
+
+        self.assertEqual(initial_created_at, updated_created_at)
+        self.assertNotEqual(initial_updated_at, updated_updated_at)
+
+
+#if __name__ == '__main__':
+ #   unittest.main()
